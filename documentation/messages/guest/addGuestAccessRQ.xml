@@ -1,0 +1,47 @@
+<x:Envelope 
+    xmlns:x="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:tem="http://tempuri.org" 
+    xmlns:oas="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" 
+    xmlns:add="http://schemas.xmlsoap.org/ws/2004/08/addressing" 
+    xmlns:ano="http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous">
+    <x:Header>
+        <tem:AuthHeader>
+            <add:Action>http://54.175.245.55/LensPMSWebService/MessengerPMSService.asmx/CreateNewBooking</add:Action>
+            <add:From>urn:KABA</add:From>
+            <add:MessageID>eccfdb89-84bd-4bf6-b905-0faea3c234bc</add:MessageID>
+            <ano:ReplyTo></ano:ReplyTo>
+            <add:To>http://54.175.245.55/LensPMSWebService/MessengerPMSService.asmx</add:To>
+            <tem:Security>
+                <oas:Timestamp>
+                    <oas:Id>a893ce8d-7873-4648-ac07-7bed61b313eb</oas:Id>
+                    <oas:Created>2016-10-10T00:00:00</oas:Created>
+                    <oas:Expires>2016-10-10T00:00:00</oas:Expires>
+                </oas:Timestamp>
+                <oas:UsernameToken>
+                    <oas:Id>f1fa612d-3640-4c2b-822c-b33960afc118</oas:Id>
+                    <oas:Username>DummyUser</oas:Username>
+                    <oas:Password>DummyPwd</oas:Password>
+                    <oas:Nonce></oas:Nonce>
+                    <oas:Created>2016-10-10T00:00:00</oas:Created>
+                </oas:UsernameToken>
+            </tem:Security>
+        </tem:AuthHeader>
+    </x:Header>
+   <x:Body>
+      <tem:AddGuestAccess>
+         <!--Optional:-->
+         <tem:ReservationID>1234</tem:ReservationID>
+         <!--Optional:-->
+         <tem:SiteName>MAIN</tem:SiteName>
+         <!--Optional:-->
+         <tem:PMSTerminalID>1</tem:PMSTerminalID>
+         <!--Optional:-->
+         <tem:RoomList>
+                    
+            <tem:string>101</tem:string>
+            <tem:string>102</tem:string>
+            <tem:string>103</tem:string>
+         </tem:RoomList>
+      </tem:AddGuestAccess>
+   </x:Body>
+</x:Envelope>

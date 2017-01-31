@@ -1,0 +1,48 @@
+{
+    "name": "kaba-gateway-api",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Kaba Gateway Adapter",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "main": "appkaba.js",
+    "dependencies": {
+        "crypto": "0.0.3",
+        "dotenv": "^2.0.0",
+        "express": "^4.12.3",
+        "express-jwt": "^3.3.0",
+        "guid": "0.0.12",
+        "moment": "^2.15.2",
+        "mongoose": "^4.6.6",
+        "mustache": "^2.3.0",
+        "request": "^2.79.0",
+        "soap": "^0.17.0",
+        "swagger-express-mw": "^0.1.0",
+        "swagger-ui-express": "^1.0.3 ",
+        "xmldom": "^0.1.22",
+        "xmlserializer": "^0.4.0",
+        "xpath": "0.0.23",
+        "log4js": "^1.1.0"
+    },
+    "devDependencies": {
+        "assert": "^1.4.1",
+        "should": "^7.1.0",
+        "supertest": "^1.0.0"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "test": "swagger project test"
+    },
+    "directories": {
+        "test": "test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Proxce/kaba-gateway-api.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Proxce/kaba-gateway-api/issues"
+    },
+    "homepage": "https://github.com/Proxce/kaba-gateway-api#readme"
+}

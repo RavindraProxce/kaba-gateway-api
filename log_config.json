@@ -1,0 +1,14 @@
+{
+    "appenders": [{
+            "category": "kaba",
+            "type": "file",
+            "filename": "logs/kaba.log",
+            "maxLogSize": 102400,
+            "backups": 3
+        },
+        {
+            "type": "console"
+        }
+    ],
+    "replaceConsole": true
+}

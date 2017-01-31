@@ -1,0 +1,47 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+   <soap:Header>
+      <AuthHeader xmlns="http://tempuri.org">
+         <Action xmlns="http://schemas.xmlsoap.org/ws/2004/08/addressing">http://54.175.245.55/LensPMSWebService/MessengerPMSService.asmx/CreateNewBookingResponse</Action>
+         <From xmlns="http://schemas.xmlsoap.org/ws/2004/08/addressing">urn:KABA</From>
+         <MessageID xmlns="http://schemas.xmlsoap.org/ws/2004/08/addressing">eccfdb89-84bd-4bf6-b905-0faea3c234bc</MessageID>
+         <ReplyTo xmlns="http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous"/>
+         <To xmlns="http://schemas.xmlsoap.org/ws/2004/08/addressing">http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</To>
+         <Security>
+            <Timestamp xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+               <Id>a893ce8d-7873-4648-ac07-7bed61b313eb</Id>
+               <Created>2016-10-10T00:00:00</Created>
+               <Expires>2016-10-10T00:00:00</Expires>
+            </Timestamp>
+            <UsernameToken xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+               <Id>f1fa612d-3640-4c2b-822c-b33960afc118</Id>
+               <Username>DummyUser</Username>
+               <Password>DummyPwd</Password>
+               <Nonce/>
+               <Created>2016-10-10T00:00:00</Created>
+            </UsernameToken>
+         </Security>
+      </AuthHeader>
+      <wsa:Action>http://tempuri.org/AddGuestAccessResponse</wsa:Action>
+      <wsa:MessageID>urn:uuid:fcdbb3f1-391a-4b1f-b644-759e127114bc</wsa:MessageID>
+      <wsa:RelatesTo>urn:uuid:1456f538-f016-427a-a6b3-e448d1202945</wsa:RelatesTo>
+      <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To>
+      <wsse:Security>
+         <wsu:Timestamp wsu:Id="Timestamp-5cc7e9e6-498f-4f1a-b126-5d86de29b165">
+            <wsu:Created>2017-01-31T10:03:47Z</wsu:Created>
+            <wsu:Expires>2017-01-31T10:08:47Z</wsu:Expires>
+         </wsu:Timestamp>
+      </wsse:Security>
+   </soap:Header>
+   <soap:Body>
+      <AddGuestAccessResponse xmlns="http://tempuri.org">
+         <AddGuestAccessResult>
+            <CMessengerResponse xmlns="">
+               <bSuccess xmlns="http://tempuri.org">true</bSuccess>
+               <ResponseCode xmlns="http://tempuri.org">0</ResponseCode>
+               <ResponseMessage xmlns="http://tempuri.org">Transaction completed successfully</ResponseMessage>
+               <retAccessKey xmlns="http://tempuri.org"/>
+            </CMessengerResponse>
+         </AddGuestAccessResult>
+      </AddGuestAccessResponse>
+   </soap:Body>
+</soap:Envelope>

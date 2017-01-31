@@ -1,0 +1,200 @@
+swagger: "2.0"
+info:
+  version: "1.3.1"
+  title: Reservation
+# during dev, should point to your local machine
+host: localhost:10014
+# basePath prefixes all resource paths
+basePath: /api
+#
+schemes:
+  # remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+  - application/octet-stream
+  - text/plain
+# format of the responses to the client (Accepts)
+
+produces:
+  - application/json
+
+paths:
+  /createNewBooking:
+    x-swagger-router-controller: kaba
+    post:
+      operationId: createNewBooking
+      description: |
+        This will create a  new key which, will remove access to all previously encoded keys that have access to the rooms. For variable room list selection, must have smartcards or memory card technology.Create one Guest Key that relates to one unique Reservation Number provided by the PMS.  
+        
+        This requires encoding of one or physical key.  Specify the room or suite (connector room) and if any additional common area doors or elevator zones additional (Pass Levels) are to be provided. Additional rooms against this Reservation Number can also be added to the key.  By default this New key will override (thus cancel) any keys previously created for the primary room or any additional rooms. 
+        
+        Finally, the PMS can optionally provide the guest name, enhancing SAFLOK Messenger reports and LENS notifications. Note that no additional pass levels can be added remotely later, they must be included on the key at this time or require key re-encoding. 
+      parameters:
+        - name: createNewBookingRequest 
+          in: body
+          schema:
+           $ref: "#/definitions/CreateNewBookingRequest"    
+      responses:
+        "200":
+          description: Create New Booking Result 
+          schema:
+            $ref: "#/definitions/Result"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  
+  /addGuestAccess :
+    x-swagger-router-controller: kaba
+    post:
+      operationId: addGuestAccess 
+      description: |
+        Will add access to the targetted rooms. In a shared with context the new rooms must be either empty or belong to the same booking, i.e. Shared with users all share a same special key. 
+      parameters:
+        - name: addGuestAccessRequest 
+          in: body
+          schema:
+           $ref: "#/definitions/AddGuestAccessRequest"    
+      responses:
+        "200":
+          description: Add Guest Access Result 
+          schema:
+            $ref: "#/definitions/Result"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"              
+            
+  /addSharedGuest:
+    x-swagger-router-controller: kaba
+    post:
+      operationId: addSharedGuest 
+      description: |
+        Will be added to the room(s) which were already booked, by Original Booker, without removing access to other users. Additional rooms will be shared only if the rooms have been booked by the same Original Booker or are free.
+      parameters:
+        - name: addSharedGuestRequest 
+          in: body
+          schema:
+           $ref: "#/definitions/AddSharedGuestRequest"    
+      responses:
+        "200":
+          description: Add Shared Guest Result 
+          schema:
+            $ref: "#/definitions/Result"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                        
+# complex objects have schema definitions
+definitions:
+  GeneralResponse:
+    type: object
+    required:
+    - result
+    properties:
+      result:
+        $ref: '#/definitions/Result'
+  
+  Result:
+    type: object
+    required:
+    - status
+    properties:
+      status:
+        type: boolean
+      message:
+        type: string
+        
+  AddGuestAccessRequest:
+    type: object
+    required:
+    - reservationId
+    - siteName
+    - pmsTerminalId
+    - roomList
+    properties:
+      reservationId:
+        type: string
+      siteName:
+        type: string
+      pmsTerminalId:
+        type: string
+      roomList:
+        type: string
+        description: Room list to provide access array of string 101,102 csv format
+        
+  CreateNewBookingRequest:
+    type: object
+    required:
+    - reservationId
+    properties:
+      reservationId:
+        description: "ReservationId of Guest."
+        type: string
+      siteName:
+        description: "For information - current site name."
+        default: "MAIN"
+        type: string
+      pmsTerminalId:
+        description: "This is the PMS terminal Id .Only one request at a time by pmsTerminalId."
+        default: "1"
+        type: string
+      encoderId:
+        description: "If 0 will not encode key and return with Key information. NOTE: Digital Key issuance the format is as follow: 999T + device number."
+        default: "PIM-61396f90c8c95b6b610ccdbada03cf9c"
+        type: string
+      checkIn:
+        description: "Checkin date time when key must be valid."
+        default: "2017-01-30T00:00:00"
+        type: string
+      checkOut:
+        default: "2017-01-31T00:00:00"
+        description: "Check out date when key must be expired."
+        type: string
+      guestName:
+        description: "Guest name or key holder name."
+        type: string
+      mainRoomNo:
+        default: "104"
+        description: "Main room of Guest."
+        type: string
+      bGrantAccessPredefinedSuiteDoors :
+        description: "Will automaticaly grant access to other doors which belong to the suite. Note: in a shared with scenario access might not be available. "
+        type: boolean
+      variableRoomList:
+        description: "The list of rooms - may contain the original room (MainRoomNo)."
+        type: string
+      commonAreaList:
+        description: "Common areas to put on key."
+        type: string
+      trackIIFolioNo:
+        description: "Used on magnetic cards."
+        type: string      
+      trackIGuestNo:
+        description: "Used on magnetic cards. "
+        type: string
+      keyCount:
+        description: ""
+        default: "1"
+        type: string
+      keySize:
+        description: ""
+        default: "0"
+        type: string
+      UID:
+        description: "16 ASCII HEX - representing the UID of the MIfare Key."
+        type: string
+
+  ErrorResponse:
+    type: object
+    required:
+    - status
+    - message
+    properties:
+      status:
+        type: boolean
+      message:
+        type: string

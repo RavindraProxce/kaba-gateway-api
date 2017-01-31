@@ -1,0 +1,45 @@
+<x:Envelope 
+    xmlns:x="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:tem="http://tempuri.org" 
+    xmlns:oas="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" 
+    xmlns:add="http://schemas.xmlsoap.org/ws/2004/08/addressing" 
+    xmlns:ano="http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous">
+    <x:Header>
+        <tem:AuthHeader>
+            <add:Action>{{header.address.action}}</add:Action>
+            <add:From>{{header.address.from}}</add:From>
+            <add:MessageID>{{header.address.messageId}}</add:MessageID>
+            <ano:ReplyTo></ano:ReplyTo>
+            <add:To>{{header.address.to}}</add:To>
+            <tem:Security>
+                <oas:Timestamp>
+                    <oas:Id>{{header.timeStamp.Id}}</oas:Id>
+                    <oas:Created>{{header.timeStamp.created}}</oas:Created>
+                    <oas:Expires>{{header.timeStamp.expires}}</oas:Expires>
+                </oas:Timestamp>
+                <oas:UsernameToken>
+                    <oas:Id>{{header.oas.Id}}</oas:Id>
+                    <oas:Username>{{header.oas.userName}}</oas:Username>
+                    <oas:Password>{{header.oas.password}}</oas:Password>
+                    <oas:Nonce></oas:Nonce>
+                    <oas:Created>{{header.oas.created}}</oas:Created>
+                </oas:UsernameToken>
+            </tem:Security>
+        </tem:AuthHeader>
+    </x:Header>
+    <x:Body>       
+         <tem:AddGuestAccess>
+         <!--Optional:-->
+         <tem:ReservationID>{{reservationId}}</tem:ReservationID>
+         <!--Optional:-->
+         <tem:SiteName>{{siteName}}</tem:SiteName>
+         <!--Optional:-->
+         <tem:PMSTerminalID>{{pmsTerminalId}}</tem:PMSTerminalID>
+         <!--Optional:-->
+         <tem:RoomList>
+            {{{roomList}}}
+         </tem:RoomList>
+      </tem:AddGuestAccess>
+
+    </x:Body>
+</x:Envelope> 
